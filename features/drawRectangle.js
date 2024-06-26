@@ -65,3 +65,11 @@ function drawRectangle(coordinates) {
 
     map.fitBounds(currentRectangle.getBounds());
 }
+
+
+// function to draw line 
+function home(){
+    return text = "text1";
+}
+
+ 
