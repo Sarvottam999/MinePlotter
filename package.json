@@ -1,0 +1,19 @@
+{
+  "devDependencies": {
+    "tailwindcss": "^3.4.3"
+  },
+  "name": "map2_software.github.io-main",
+  "version": "1.0.0",
+  "main": "script2-add-detector.js",
+  "directories": {
+    "lib": "lib"
+  },
+  
+  "scripts": {
+    "build": "npx tailwindcss -i ./style.css -o ./dist/output.css --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Leaflet Map Dashboard</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-draw@1.0.4/dist/leaflet.draw.css" />
+  <script src='./lib/turf@6.5.0.js'></script>
+
+  <style>
+    #map {
+      height: 600px;
+    }
+    .leaflet-control-layers {
+      background: white;
+    }
+    .toolbox {
+      position: absolute;
+      top: 10px;
+      left: 50px;
+      z-index: 1000;
+      background: white;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+  
+<div class="button-container">
+  <button id="drawSquare">Draw Square</button>
+  <button id="drawLine">Draw Line</button>
+  <button id="drawDottedLine">Draw Dotted Line</button>
+  <button id="drawZigzagLine">Draw Zigzag Line</button>
+</div>
+<div id="map"></div>
+<div id="info">
+  <p>Current Coordinates: <span id="current-coordinates"></span></p>
+  <p>Current Measurement: <span id="current-measurement"></span></p>
+</div>
+
+<div id="conatiner"></div>
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet-draw@1.0.4/dist/leaflet.draw.js"></script>
+  <!-- <script src="./lib/leaflet.geometryutil.js"></script> -->
+  <script>
+    var map = L.map('map').setView([51.505, -0.09], 13);
+    
+
+    // L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    //   attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    // }).addTo(map);
+
+    // var drawnItems = new L.FeatureGroup();
+    // map.addLayer(drawnItems);
+
+    // var drawControl = new L.Control.Draw({
+    //   edit: {
+    //     featureGroup: drawnItems
+    //   },
+    //   draw: false
+    // });
+    // map.addControl(drawControl);
+
+    // map.on(L.Draw.Event.CREATED, function (event) {
+    //   var layer = event.layer;
+    //   drawnItems.addLayer(layer);
+    // });
+
+    // function enableDrawLine() {
+    //   var drawLine = new L.Draw.Polyline(map, drawControl.options.polyline);
+    //   drawLine.enable();
+    // }
+
+    // function enableDrawShape() {
+    //   var drawShape = new L.Draw.Polygon(map, drawControl.options.polygon);
+    //   drawShape.enable();
+    // }
+
+    // function createMarker() {
+    //   var marker = L.marker(map.getCenter(), {draggable: true}).addTo(map);
+    //   drawnItems.addLayer(marker);
+    // }
+
+    // function clearMap() {
+    //   drawnItems.clearLayers();
+    // }
+  </script>
+  <!-- <script src="moveable-rec.js"></script> -->
+  <!-- <script src="popup.js"></script> -->
+  <script src="3custom-tools.js"></script>
+
+
+</body>
+</html>
