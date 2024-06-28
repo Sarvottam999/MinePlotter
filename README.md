@@ -31,6 +31,7 @@
     cd MinePlotter
     ```
 
+
 ## Usage
 
 1. Open `index.html` in your web browser.
@@ -38,6 +39,5 @@
 3. Customize mine placements by selecting types and quantities.
 4. Save or export your layout as needed.
 
- 
 
 
