@@ -63,3 +63,14 @@ function toggleText1() {
       moreText.classList.add("hidden");
      }
   }
+
+  function toggleText5DottedLine() {
+    let moreText = document.getElementById("toggal5");
+    let buttonText = document.getElementById("toggalbtn5");
+
+    if (moreText.classList.contains("hidden")) {
+      moreText.classList.remove("hidden");
+     } else {
+      moreText.classList.add("hidden");
+     }
+  }

@@ -26,7 +26,7 @@
       }
       #coord-info-container {
         position: absolute;
-        bottom: 0px;
+        bottom: 20px;
         right: 50px;
         z-index: 1000;
         background: white;
@@ -34,6 +34,19 @@
         border: 1px solid #ccc;
         border-radius: 4px;
       }
+      #zoominfo{
+
+        position: absolute;
+        bottom: 50px;
+        left: 40px;
+        z-index: 1000;
+        background: white;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+
+      }
+      
       #map:hover {
         cursor: default;
       }
@@ -191,12 +204,37 @@
 
         <!-- ======================  dotted line ============================ -->
         <div class="info-panel flex flex-col space-y-2">
+
+          <button
+          onclick="toggleText5DottedLine()"
+          id="toggalbtn5"
+          class="w-20 bg-blue-500 hover:bg-blue-700 text-white font-bold rounded flex items-center justify-center"
+        >
+          <div class="h-8 w-8 items-center flex justify-center">
+            <img src="./icon25/dotLine.svg" class="iconbtn" alt="" srcset="" />
+
+          </div>
+        </button>
+        <div id="toggal5" class="hidden">
+
+
           <button
             id="drawDottedLine"
-            class="w-20 bg-blue-500 hover:bg-blue-700 text-white font-bold rounded flex items-center justify-center"
-          >
-            <img src="./icon25/dotLine.svg" class="iconbtn" alt="" srcset="" />
+            class="w-20 bg-gray-800 hover:bg-slate-700 text-white font-bold rounded flex items-center justify-center"
+          >Draw
           </button>
+
+
+          <div id="infox">
+            <!-- <p>Current Coordinates: <span id="coordinatesx">-</span></p> -->
+            <p>Bearing: <span id="bearingx">-</span></p>
+            <p>Distance: <span id="distancex">-</span></p>
+          </div>
+        </div>
+
+
+
+
           <button
             id="drawPolygon"
             class="w-20 bg-blue-500 hover:bg-blue-700 text-white font-bold rounded flex items-center justify-center"
@@ -402,6 +440,7 @@
           </div>
       </div>
       <div id="map" class=" "></div>
+    
     </div>
 
 </div>
@@ -427,9 +466,12 @@
       </button>
     </div>
 
-    <!-- Buttons to draw different shapes -->
-
+ 
     <div id="rectangle-dimensions"></div>
+    <div id="zoominfo">
+      <p>Zoom Level: <span id="zoomLevel">-</span></p>
+      <p>Zoom Distance: <span id="zoomDistance">-</span></p>
+    </div>
 
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     <script src="https://unpkg.com/leaflet-draw@1.0.4/dist/leaflet.draw.js"></script>
@@ -437,13 +479,36 @@
 
     <!-- <script src="./lib/leaflet.geometryutil.js"></script> -->
     <script>
-      var map = L.map("map").setView([51.505, -0.09], 19);
+      var map = L.map("map").setView([27.506127,91.9435651], 18);
 
-      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-        attribution:
-          '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+      // L.tileLayer("./Layer/{z}/{x}/{y}.png", {
+      //   attribution:
+      //     '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+      //   maxZoom: 16,
+      // }).addTo(map);
+//       L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}',{
+//         maxZoom: 20,
+//         subdomains:['mt0','mt1','mt2','mt3']
+// }).addTo(map);
+// Define base layers
+const streetLayer =L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}',{
         maxZoom: 25,
-      }).addTo(map);
+        subdomains:['mt0','mt1','mt2','mt3']
+});
+
+const satelliteLayer = L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}',{
+        maxZoom: 25,
+        subdomains:['mt0','mt1','mt2','mt3']
+});
+
+// Add initial layer to the map
+streetLayer.addTo(map);
+
+// Add layer control to switch between street and satellite layers
+L.control.layers({
+  'Street View': streetLayer,
+  'Satellite View': satelliteLayer
+}).addTo(map);
 
  
       // var drawnItems = new L.FeatureGroup();
@@ -486,6 +551,8 @@
     <!-- <script src="moveable-rec.js"></> -->
     <!-- <script src="popup.js"></script> -->
     <script src="i3.js"></script>
+    <script src="./features/zoom_info.js"></script>
+
     <script src="./features/main.js"></script>
     <script src="./features/drawRectangle.js"></script>
     <script src="./features/drawText.js"></script>

@@ -27,19 +27,15 @@
 </head>
 <body>
   
-<div class="button-container">
-  <button id="drawSquare">Draw Square</button>
-  <button id="drawLine">Draw Line</button>
-  <button id="drawDottedLine">Draw Dotted Line</button>
-  <button id="drawZigzagLine">Draw Zigzag Line</button>
-</div>
-<div id="map"></div>
-<div id="info">
-  <p>Current Coordinates: <span id="current-coordinates"></span></p>
-  <p>Current Measurement: <span id="current-measurement"></span></p>
-</div>
-
-<div id="conatiner"></div>
+ 
+  <div id="map"></div>
+  <div id="info">
+    <p>Current Coordinates: <span id="coordinates">-</span></p>
+    <p>Bearing: <span id="bearing">-</span></p>
+  </div>
+  
+  
+  
   <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
   <script src="https://unpkg.com/leaflet-draw@1.0.4/dist/leaflet.draw.js"></script>
   <!-- <script src="./lib/leaflet.geometryutil.js"></script> -->
@@ -88,7 +84,7 @@
   </script>
   <!-- <script src="moveable-rec.js"></script> -->
   <!-- <script src="popup.js"></script> -->
-  <script src="3custom-tools.js"></script>
+  <script src="line_bearing_distance.js"></script>
 
 
 </body>
