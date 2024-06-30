@@ -67,6 +67,8 @@ var marker_lines = [
  
 
 
+// var markersx = [];
+
 
 
   // Function to draw a custom line
@@ -102,11 +104,15 @@ function drawLine(start, end, marker_lines, layer, customIcon) {
             // console.log(marker_lines.height)
             const leftpt = turf.rhumbDestination(pointsToTurf(pointsInMeters[i]), cmToKm(marker_lines.height), bearing - 90);
             L.polyline([pointsInMeters[i], getLeafletCoords(leftpt)]).setStyle({ color: marker_lines.color, weight: 5 }).addTo(layer);
-            L.marker(getLeafletCoords(leftpt), { icon: customIcon }).addTo(layer);
+            var m = L.marker(getLeafletCoords(leftpt), { icon: customIcon }).addTo(layer);
+            // markersx.push(m);
+
         } else {
             const rightpt = turf.rhumbDestination(pointsToTurf(pointsInMeters[i]), cmToKm(marker_lines.height), bearing + 90);
             L.polyline([pointsInMeters[i], getLeafletCoords(rightpt)]).setStyle({ color: marker_lines.color, weight: 5 }).addTo(layer);
-            L.marker(getLeafletCoords(rightpt), { icon: customIcon }).addTo(layer);
+            var m = L.marker(getLeafletCoords(rightpt), { icon: customIcon }).addTo(layer);
+            // markersx.push(m);
+
         }
     }
 }
@@ -272,3 +278,25 @@ function drawLineRowDouble(start, end, marker_lines, layer, customIcon, top) {
        
 }
     }
+
+
+      // Function to update the icon size of all markers based on the zoom level
+      // function updateIconSizes() {
+      //   var zoomLevel = map.getZoom();
+      //   var newSize = 25 + (zoomLevel - 13) * 2; // Adjust the calculation as needed
+      //   markersx.forEach(marker => {
+      //     marker.setIcon(getCustomIcon(newSize));
+      //   });
+      // }
+
+      // function getCustomIcon(size = 25) {
+      //   return L.icon({
+      //      iconSize: [size, size * 1.64], // maintain aspect ratio
+      //     iconAnchor: [size / 2, size * 1.64], // adjust anchor point based on new size
+      //     popupAnchor: [1, -size] // adjust popup anchor
+      //   });
+      // }
+      // map.on('zoom', updateIconSizes);
+      //  updateIconSizes();
+  
+  
