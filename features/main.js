@@ -48,26 +48,7 @@ function selectLayer(layer) {
 }
 
 
-var Myicons = [
-    L.icon({
-      iconUrl: '../icon25/iconred1.png',
-      iconSize: [15, 15],
-      // iconAnchor: [10, 32],
-    }),
-    L.icon({
-      iconUrl: '../icon25/icongreen1.png',
-      iconSize: [15, 15],
-      // iconAnchor: [10, 32],
-    }),
-    L.icon({
-      iconUrl: '../icon25/iconblue1.png',
-      iconSize: [15, 15],
-      // iconAnchor: [16, 32],
-    })
-  
-  
-  
-  ]
+
 
 // Define marker lines
 var marker_lines = [

@@ -90,7 +90,7 @@
           href="https://flowbite.com/"
           class="flex items-center space-x-3 rtl:space-x-reverse"
         >
-          <img src="./icon25/logo.jpeg" class="h-12" alt="Flowbite Logo" />
+          <img src="./icon25/logo.jpeg" class="h-8" alt="Flowbite Logo" />
           <span
             class="self-center text-2xl font-semibold whitespace-nowrap  "
             >Plotter</span
@@ -510,7 +510,26 @@ L.control.layers({
   'Satellite View': satelliteLayer
 }).addTo(map);
 
- 
+var Myicons = [
+    L.icon({
+      iconUrl: 'icon25/iconred1.png',
+      iconSize: [15, 15],
+      // iconAnchor: [10, 32],
+    }),
+    L.icon({
+      iconUrl: 'icon25/icongreen1.png',
+      iconSize: [15, 15],
+      // iconAnchor: [10, 32],
+    }),
+    L.icon({
+      iconUrl: 'icon25/iconblue1.png',
+      iconSize: [15, 15],
+      // iconAnchor: [16, 32],
+    })
+  
+  
+  
+  ]
       // var drawnItems = new L.FeatureGroup();
       // map.addLayer(drawnItems);
 
@@ -557,7 +576,6 @@ L.control.layers({
     <script src="./features/drawRectangle.js"></script>
     <script src="./features/drawText.js"></script>
     <script src="./features/deletLayer.js"></script>
-    <script src="./features/dottedLine.js"></script>
     <script src="./features/currentCord.js"></script>
     <script src="./features/drawDottedLine.js"></script>
     <script src="./features/drawCircle.js"></script>

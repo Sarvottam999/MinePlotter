@@ -11,13 +11,13 @@ document.getElementById('rowAntiPrnlTop').onclick = function() {
     // Listen for the first click to set the start point
     map.once('click', function(e) {
         startPoint = [e.latlng.lat, e.latlng.lng];
-        console.log('Start point:', startPoint);
+        // console.log('Start point:', startPoint);
 
         // Listen for the second click to set the end point
         map.once('click', function(e) {
             endPoint = [e.latlng.lat, e.latlng.lng];
-            console.log('End point:', endPoint);
-            console.log("row - single - enti - up");
+            // console.log('End point:', endPoint);
+            // console.log("row - single - enti - up");
 
 
             drawLineRow(startPoint, endPoint, marker_lines[3], editableLayers, Myicons[0], true);
@@ -40,14 +40,14 @@ document.getElementById('rowAntiPrnlDown').onclick = function() {
     // Listen for the first click to set the start point
     map.once('click', function(e) {
         startPoint = [e.latlng.lat, e.latlng.lng];
-        console.log('Start point:', startPoint);
-        console.log("row - single - enti - down");
+        // console.log('Start point:', startPoint);
+        // console.log("row - single - enti - down");
 
         // Listen for the second click to set the end point
         map.once('click', function(e) {
             endPoint = [e.latlng.lat, e.latlng.lng];
-            console.log('End point:', endPoint);
-            console.log("check" );
+            // console.log('End point:', endPoint);
+            // console.log("check" );
 
 
             drawLineRow(startPoint, endPoint, marker_lines[3], editableLayers, Myicons[0], false);
