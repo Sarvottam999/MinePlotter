@@ -19,6 +19,9 @@ document.getElementById('copy-button').addEventListener('click', function() {
   document.execCommand('copy');
   // Remove the temporary textarea from the document
   document.body.removeChild(tempTextarea);
+
+		showToast("Copied Cordinates!","success",5000); 
+  
   // Optionally, give feedback to the user
   // alert('Content copied to clipboard!');
 });

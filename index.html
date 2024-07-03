@@ -12,6 +12,8 @@
     />
     <script src="./lib/turf@6.5.0.js"></script>
     <link rel="stylesheet" href="./dist/output.css" />
+    <link rel="stylesheet" href="./dist/toast.css" />
+
     <script src="./toggals.js"></script>
 
     <style>
@@ -150,8 +152,7 @@
         </div>
       </div>
     </nav>
-
-    <div class="flex  flex-grow flex-row   bg-blue-300">
+     <div class="flex  flex-grow flex-row   bg-blue-300">
       <div class="w-[35%] lg:w-[20%] pt-10 pl-9 flex flex-col space-y-2  ">
         <!-- =========================  button ========================== -->
         <button
@@ -480,6 +481,8 @@
       <p>Zoom Distance: <span id="zoomDistance">-</span></p>
     </div>
 
+    <div class="toast-overlay" id="toast-overlay"></div> 
+
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     <script src="https://unpkg.com/leaflet-draw@1.0.4/dist/leaflet.draw.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@turf/turf@7/turf.min.js"></script>
@@ -576,7 +579,7 @@ var Myicons = [
       </script>
  
     <!-- <script src="moveable-rec.js"></> -->
-    <!-- <script src="popup.js"></script> -->
+    <script src="features/toast-notification.js"></script>
     <script src="i3.js"></script>
     <script src="./features/zoom_info.js"></script>
 
@@ -585,7 +588,7 @@ var Myicons = [
     <script src="./features/drawRectangle.js"></script>
     <script src="./features/drawText.js"></script>
     <script src="./features/deletLayer.js"></script>
-    <script src="./features/currentCord.js"></script>
+    <script src="./features/currentCord_copy-cord.js"></script>
     <script src="./features/drawDottedLine.js"></script>
     <script src="./features/drawCircle.js"></script>
     <script src="./features/drawPolygon.js"></script>
