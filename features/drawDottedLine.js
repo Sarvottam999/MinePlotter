@@ -212,28 +212,42 @@ map.on('draw:drawstart', function() {
 
 // Handle line creation
 map.on(L.Draw.Event.CREATED, function(event) {
-  const layer = event.layer;
+  if (currentDrawObject === "dottedLine") {
+    const layer = event.layer;
 
-  editableLayers.addLayer(layer);
-  calculateAndShowPopup(layer);
-  map.off('mousemove', onMouseMove);
-  startPointx =null;
+    editableLayers.addLayer(layer);
+    calculateAndShowPopup(layer);
+    map.off('mousemove', onMouseMove);
+    startPointx =null;
+  currentDrawObject = ""
+
+
+    
+  }
+
 
 
 });
 
 // Handle line edit
 map.on('draw:edited', function(event) {
+  if (currentDrawObject === "dottedLine") {
     startPointx =null;
 
-  const layers = event.layers;
-  layers.eachLayer(function(layer) {
-    calculateAndShowPopup(layer);
-  });
+    const layers = event.layers;
+    layers.eachLayer(function(layer) {
+      calculateAndShowPopup(layer);
+    });
+    currentDrawObject = ""
+
+
+  }
+
 });
 
 // Enable drawing of a dotted line
 document.getElementById('drawDottedLine').onclick = function() {
+  currentDrawObject = "dottedLine"
 
     currentBearing.innerText =   '0°';
     currentDistance.innerText =   '0 meters';
@@ -255,6 +269,8 @@ document.getElementById('drawDottedLine').onclick = function() {
   map.on('draw:drawstop', function() {
     map.off('mousemove', onMouseMove);
   });
+ 
+
 };
 
 // Handle mouse move to show real-time distance and bearing

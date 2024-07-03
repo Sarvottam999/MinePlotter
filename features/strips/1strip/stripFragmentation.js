@@ -11,12 +11,12 @@ document.getElementById('stripFragmentation').onclick = function() {
     // Listen for the first click to set the start point
     map.once('click', function(e) {
         startPoint = [e.latlng.lat, e.latlng.lng];
-        console.log('Start point:', startPoint);
+        // console.log('Start point:', startPoint);
 
         // Listen for the second click to set the end point
         map.once('click', function(e) {
             endPoint = [e.latlng.lat, e.latlng.lng];
-            console.log('End point:', endPoint);
+            // console.log('End point:', endPoint);
 
             drawLine(startPoint, endPoint, marker_lines[2], editableLayers, Myicons[2]);
 

@@ -1,7 +1,11 @@
 // var editableLayers = new L.FeatureGroup();
 // map.addLayer(editableLayers);
 
-var selectedLayer = null;
+ var selectedLayersForDelete = [];
+ var currentDrawObject = null;
+
+
+
 
 
 // ######################  Utility #################
@@ -39,13 +43,21 @@ function metersToKilometers(meters) {
   
 
 
+ 
 function selectLayer(layer) {
-    if (selectedLayer) {
-        selectedLayer.setStyle({ color: 'blue' });
-    }
-    selectedLayer = layer;
-    selectedLayer.setStyle({ color: 'red' });
+  const layerIndex = selectedLayersForDelete.indexOf(layer);
+
+  if (layerIndex !== -1) {
+    // Layer is already selected, remove it from the array
+    selectedLayersForDelete.splice(layerIndex, 1);
+    layer.setStyle({ color: 'blue' }); // Reset to default color
+  } else {
+    // Layer is not selected, add it to the array
+    selectedLayersForDelete.push(layer);
+    layer.setStyle({ color: '#57ffe1' }); // Highlight selected layer
+  }
 }
+
 
 
 
@@ -68,7 +80,9 @@ var marker_lines = [
 
 
 // var markersx = [];
-
+ 
+ 
+ 
 
 
   // Function to draw a custom line
@@ -103,15 +117,52 @@ function drawLine(start, end, marker_lines, layer, customIcon) {
         if (i % 2 === 0) {
             // console.log(marker_lines.height)
             const leftpt = turf.rhumbDestination(pointsToTurf(pointsInMeters[i]), cmToKm(marker_lines.height), bearing - 90);
-            L.polyline([pointsInMeters[i], getLeafletCoords(leftpt)]).setStyle({ color: marker_lines.color, weight: 5 }).addTo(layer);
-            var m = L.marker(getLeafletCoords(leftpt), { icon: customIcon }).addTo(layer);
+            let x1 = L.polyline([pointsInMeters[i], getLeafletCoords(leftpt)]).setStyle({ color: marker_lines.color, weight: 5 }).addTo(layer);
+            // var m = L.marker(getLeafletCoords(leftpt), { icon: customIcon }).addTo(layer);
             // markersx.push(m);
+            var circle = L.circle(getLeafletCoords(leftpt), {
+              color: marker_lines.color,
+              fillColor: marker_lines.color,
+              fillOpacity: 0.5,
+              radius: 0.1
+            }).addTo(layer);
+            x1.on('click', function(e) {
+              selectLayer(e.target);
+           
+              selectLayer(circle);
+
+
+          });
+          circle.on('click', function(e) {
+            // selectLayer(e.target);
+         
+            selectLayer(e.target);
+
+
+        });
 
         } else {
             const rightpt = turf.rhumbDestination(pointsToTurf(pointsInMeters[i]), cmToKm(marker_lines.height), bearing + 90);
-            L.polyline([pointsInMeters[i], getLeafletCoords(rightpt)]).setStyle({ color: marker_lines.color, weight: 5 }).addTo(layer);
-            var m = L.marker(getLeafletCoords(rightpt), { icon: customIcon }).addTo(layer);
+          let x1 =  L.polyline([pointsInMeters[i], getLeafletCoords(rightpt)]).setStyle({ color: marker_lines.color, weight: 5 }).addTo(layer);
+            // var m = L.marker(getLeafletCoords(rightpt), { icon: customIcon }).addTo(layer);
             // markersx.push(m);
+            var circle = L.circle(getLeafletCoords(rightpt), {
+              color: marker_lines.color,
+              fillColor: marker_lines.color,
+              fillOpacity: 0.5,
+              radius: 0.1
+            }).addTo(layer);
+
+            x1.on('click', function(e) {
+              selectLayer(e.target);
+          });
+          circle.on('click', function(e) {
+            // selectLayer(e.target);
+         
+            selectLayer(e.target);
+
+
+        });
 
         }
     }
@@ -165,11 +216,28 @@ function drawLineRow(start, end, marker_lines, layer, customIcon, top) {
         // }
             // // console.log(marker_lines.height)
             const leftpt = turf.rhumbDestination(pointsToTurf(pointsInMeters[i]), cmToKm(marker_lines.height), bearing - 90);
-            L.polyline([pointsInMeters[i], getLeafletCoords(leftpt)]).setStyle({ color: marker_lines.color, weight: 5 }).addTo(layer);
-            L.marker(getLeafletCoords(leftpt), { icon: customIcon }).addTo(layer);
+            let x1 = L.polyline([pointsInMeters[i], getLeafletCoords(leftpt)]).setStyle({ color: marker_lines.color, weight: 5 }).addTo(layer);
+            // L.marker(getLeafletCoords(leftpt), { icon: customIcon }).addTo(layer);
             // const rightpt = turf.rhumbDestination(pointsToTurf(pointsInMeters[i]), cmToKm(marker_lines.height), bearing + 90);
             // L.polyline([pointsInMeters[i], getLeafletCoords(rightpt)]).setStyle({ color: marker_lines.color, weight: 5 }).addTo(layer);
             // L.marker(getLeafletCoords(rightpt), { icon: customIcon }).addTo(layer);
+            var circle = L.circle(getLeafletCoords(leftpt), {
+              color: marker_lines.color,
+              fillColor: marker_lines.color,
+              fillOpacity: 0.5,
+              radius: 0.1
+            }).addTo(layer);
+            x1.on('click', function(e) {
+              selectLayer(e.target);
+           
+ 
+
+          });
+          circle.on('click', function(e) {         
+            selectLayer(e.target);
+
+
+        });
     }
     } else {
     for (var i = 0; i < pointsInMeters.length; i++) {
@@ -192,8 +260,25 @@ function drawLineRow(start, end, marker_lines, layer, customIcon, top) {
             
             
             const rightpt = turf.rhumbDestination(pointsToTurf(pointsInMeters[i]), cmToKm(marker_lines.height), bearing + 90);
-            L.polyline([pointsInMeters[i], getLeafletCoords(rightpt)]).setStyle({ color: marker_lines.color, weight: 5 }).addTo(layer);
-            L.marker(getLeafletCoords(rightpt), { icon: customIcon }).addTo(layer);
+            var x1 = L.polyline([pointsInMeters[i], getLeafletCoords(rightpt)]).setStyle({ color: marker_lines.color, weight: 5 }).addTo(layer);
+            // L.marker(getLeafletCoords(rightpt), { icon: customIcon }).addTo(layer);
+            var circle = L.circle(getLeafletCoords(rightpt), {
+              color: marker_lines.color,
+              fillColor: marker_lines.color,
+              fillOpacity: 0.5,
+              radius: 0.1
+            }).addTo(layer);
+            x1.on('click', function(e) {
+              selectLayer(e.target);
+           
+ 
+
+          });
+          circle.on('click', function(e) {         
+            selectLayer(e.target);
+
+
+        });
         
     }
     }
@@ -237,18 +322,52 @@ function drawLineRowDouble(start, end, marker_lines, layer, customIcon, top) {
             const leftpt = turf.rhumbDestination(pointsToTurf(pointsInMeters[i]), cmToKm(marker_lines.height[0]), bearing - 90);
     // console.log("d4");
 
-            L.polyline([pointsInMeters[i], getLeafletCoords(leftpt)]).setStyle({ color: marker_lines.color, weight: 5 }).addTo(layer);
+          let x1 =   L.polyline([pointsInMeters[i], getLeafletCoords(leftpt)]).setStyle({ color: marker_lines.color, weight: 5 }).addTo(layer);
     // console.log("d5");
             
-            L.marker(getLeafletCoords(leftpt), { icon: customIcon }).addTo(layer);
+            // L.marker(getLeafletCoords(leftpt), { icon: customIcon }).addTo(layer);
+            var circle = L.circle(getLeafletCoords(leftpt), {
+              color: marker_lines.color,
+              fillColor: marker_lines.color,
+              fillOpacity: 0.5,
+              radius: 0.1
+            }).addTo(layer);
+            x1.on('click', function(e) {
+              selectLayer(e.target);
+           
+ 
+
+          });
+          circle.on('click', function(e) {         
+            selectLayer(e.target);
+
+
+        });
     // console.log("d6");
 
         } else {
     // console.log("d3");
 
             const leftpt = turf.rhumbDestination(pointsToTurf(pointsInMeters[i]), cmToKm(marker_lines.height[1]), bearing - 90);
-            L.polyline([pointsInMeters[i], getLeafletCoords(leftpt)]).setStyle({ color: marker_lines.color, weight: 5 }).addTo(layer);
-            L.marker(getLeafletCoords(leftpt), { icon: customIcon }).addTo(layer);
+            let x1 =    L.polyline([pointsInMeters[i], getLeafletCoords(leftpt)]).setStyle({ color: marker_lines.color, weight: 5 }).addTo(layer);
+            // L.marker(getLeafletCoords(leftpt), { icon: customIcon }).addTo(layer);
+            var circle = L.circle(getLeafletCoords(leftpt), {
+              color: marker_lines.color,
+              fillColor: marker_lines.color,
+              fillOpacity: 0.5,
+              radius: 0.1
+            }).addTo(layer);
+            x1.on('click', function(e) {
+              selectLayer(e.target);
+           
+ 
+
+          });
+          circle.on('click', function(e) {         
+            selectLayer(e.target);
+
+
+        });
  
         }
             
@@ -261,15 +380,49 @@ function drawLineRowDouble(start, end, marker_lines, layer, customIcon, top) {
     // console.log(pointsInMeters[i])
 
             const rightpt = turf.rhumbDestination(pointsToTurf(pointsInMeters[i]), cmToKm(marker_lines.height[0]), bearing + 90);
-        L.polyline([pointsInMeters[i], getLeafletCoords(rightpt)]).setStyle({ color: marker_lines.color, weight: 5 }).addTo(layer);
-        L.marker(getLeafletCoords(rightpt), { icon: customIcon }).addTo(layer); 
+            let x1 =  L.polyline([pointsInMeters[i], getLeafletCoords(rightpt)]).setStyle({ color: marker_lines.color, weight: 5 }).addTo(layer);
+        // L.marker(getLeafletCoords(rightpt), { icon: customIcon }).addTo(layer); 
+        var circle = L.circle(getLeafletCoords(rightpt), {
+          color: marker_lines.color,
+          fillColor: marker_lines.color,
+          fillOpacity: 0.5,
+          radius: 0.1
+        }).addTo(layer);
+        x1.on('click', function(e) {
+          selectLayer(e.target);
+       
+
+
+      });
+      circle.on('click', function(e) {         
+        selectLayer(e.target);
+
+
+    });
     } else {
     // console.log("d2");
     // console.log(pointsInMeters[i])
 
           const rightpt = turf.rhumbDestination(pointsToTurf(pointsInMeters[i]), cmToKm(marker_lines.height[1]), bearing + 90);
-        L.polyline([pointsInMeters[i], getLeafletCoords(rightpt)]).setStyle({ color: marker_lines.color, weight: 5 }).addTo(layer);
-        L.marker(getLeafletCoords(rightpt), { icon: customIcon }).addTo(layer); 
+          let x1 =  L.polyline([pointsInMeters[i], getLeafletCoords(rightpt)]).setStyle({ color: marker_lines.color, weight: 5 }).addTo(layer);
+        // L.marker(getLeafletCoords(rightpt), { icon: customIcon }).addTo(layer); 
+        var circle = L.circle(getLeafletCoords(rightpt), {
+          color: marker_lines.color,
+          fillColor: marker_lines.color,
+          fillOpacity: 0.5,
+          radius: 0.1
+        }).addTo(layer);
+        x1.on('click', function(e) {
+          selectLayer(e.target);
+       
+
+
+      });
+      circle.on('click', function(e) {         
+        selectLayer(e.target);
+
+
+    });
 
     
     }

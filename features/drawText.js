@@ -22,7 +22,9 @@ document.getElementById('addTextLabel').onclick = function() {
 
     var labelMarker = L.marker(center, { icon: labelIcon, draggable: true }).addTo(editableLayers);
 
-
+    labelMarker.on('click', function(e) {
+        selectLayer(e.target);
+    });
     // labelMarker.on('click', function() {
     //     selectLayer(labelMarker);
     // });

@@ -3,9 +3,14 @@
     var polygonDrawer = new L.Draw.Polygon(map);
     polygonDrawer.enable();
 
+  
+
     map.once('draw:created', function(event) {
         var layer = event.layer;
         editableLayers.addLayer(layer);
         polygonDrawer.disable();
+        layer.on('click', function(e) {
+          selectLayer(e.target);
+      });
     });
 };

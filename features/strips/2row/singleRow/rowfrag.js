@@ -11,13 +11,13 @@ document.getElementById('rowFragTop').onclick = function() {
     // Listen for the first click to set the start point
     map.once('click', function(e) {
         startPoint = [e.latlng.lat, e.latlng.lng];
-        console.log('Start point:', startPoint);
+        // console.log('Start point:', startPoint);
 
         // Listen for the second click to set the end point
         map.once('click', function(e) {
             endPoint = [e.latlng.lat, e.latlng.lng];
-            console.log('End point:', endPoint);
-            console.log("row - single - frag - up");
+            // console.log('End point:', endPoint);
+            // console.log("row - single - frag - up");
 
 
             drawLineRow(startPoint, endPoint, marker_lines[4], editableLayers, Myicons[1], true);
@@ -41,13 +41,13 @@ document.getElementById('rowFraglDown').onclick = function() {
     // Listen for the first click to set the start point
     map.once('click', function(e) {
         startPoint = [e.latlng.lat, e.latlng.lng];
-        console.log('Start point:', startPoint);
+        // console.log('Start point:', startPoint);
 
         // Listen for the second click to set the end point
         map.once('click', function(e) {
             endPoint = [e.latlng.lat, e.latlng.lng];
-            console.log('End point:', endPoint);
-            console.log("row - single - frag - down");
+            // console.log('End point:', endPoint);
+            // console.log("row - single - frag - down");
 
 
 
